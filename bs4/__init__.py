@@ -48,6 +48,8 @@ __all__ = [
     "MarkupResemblesLocatorWarning",
     "UnusualUsageWarning",
     "XMLParsedAsHTMLWarning",
+
+    'SoupReplacer',
 ]
 
 from collections import Counter
@@ -88,6 +90,7 @@ from .element import (
     TemplateString,
 )
 from .formatter import Formatter
+from .replacer import SoupReplacer
 from .filter import (
     ElementFilter,
     SoupStrainer,
@@ -215,6 +218,7 @@ class BeautifulSoup(Tag):
         from_encoding: Optional[_Encoding] = None,
         exclude_encodings: Optional[_Encodings] = None,
         element_classes: Optional[Dict[Type[PageElement], Type[PageElement]]] = None,
+        replacer=None,
         **kwargs: Any,
     ):
         """Constructor.
@@ -431,6 +435,7 @@ class BeautifulSoup(Tag):
                 )
 
         self.builder = builder
+        self.replacer = replacer
         self.is_xml = builder.is_xml
         self.known_xml = self.is_xml
         self._namespaces = dict()
