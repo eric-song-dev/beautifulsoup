@@ -37,8 +37,8 @@ def main():
 
     source = sys.argv[1]
     
-    tag_replacer = SoupReplacer("b", "blockquote")
-    soup = get_soup(source, replacer=tag_replacer)
+    b_to_blockquote = SoupReplacer("b", "blockquote")
+    soup = get_soup(source, replacer=b_to_blockquote)
     
     blockquote_tags = soup.find_all('blockquote')
     
