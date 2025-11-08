@@ -98,8 +98,34 @@
           * **Step 4 (Failure):** The parser sees `<blockquote>` on the stack, not `<b>`. It detects a mismatch (`"b" != "blockquote"`), breaks the stack, and prematurely pops the parent `<p>` tag to "fix" the perceived error.
           * **Step 5 (Result):** The final `.` (period) in the markup is processed after the `<p>` tag was abnormally popped. It gets added to the root document, not inside the paragraph. The assertion fails because `str(soup.p)` is missing the period.
 
+        **Solution:**
 
-
+          1. Just use `name_xformer` to change the name instead of `xformer`
+          2. The `handle_endtag` method processes closing tags by transforming the tag name via a replacer. If the transformation leaves the name unchanged and an xformer is present, it searches the tag stack for the actually transformed tag name to match the corresponding opening tag.
+   
+          ```python
+          class BeautifulSoup(Tag):
+              def handle_endtag(self, name: str, nsprefix:   Optional[str] = None) -> None:
+  
+                  ...
+  
+                  original_name = name
+                  if self.replacer:
+                      name = self.replacer.replace_tag_name  (name)
+                      # If using xformer and   replace_tag_name didn't change the   name,
+                      # we need to find the actual tag name   in the tagStack
+                      if name == original_name and self.  replacer.xformer:
+                          # Look for the most recent tag in   tagStack that might have been
+                          # transformed from original_name   by xformer
+                          for i in range(len(self.tagStack)   - 1, 0, -1):
+                              tag = self.tagStack[i]
+                              if tag.name != original_name   and self.open_tag_counter.get  (tag.name, 0) > 0:
+                                  # This tag might have been   transformed from   original_name
+                                  # Use the transformed name   for matching
+                                  name = tag.name
+                                  break
+                  ...
+          ```
 
 ---
 
