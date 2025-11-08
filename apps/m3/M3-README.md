@@ -1,6 +1,17 @@
 # Milestone-3
 
-## Part-1: Implement task7.py
+## Part-1: Git Diff
+
+```git
+ apps/m3/M3-README.md       | 113 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ apps/m3/task7.py           |  65 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ bs4/builder/_htmlparser.py |   4 ++++
+ bs4/replacer.py            |  48 ++++++++++++++++++++++++++++++++++++++++++++----
+ bs4/tests/test_replacer.py | 141 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ 5 files changed, 353 insertions(+), 7 deletions(-)
+```
+
+## Part-2: Implement task7.py
 
 ### Files
 
@@ -18,7 +29,7 @@
     python3 task7.py https://www.w3schools.com/html/html_paragraphs.asp
     ```
 
-## Part-2: Technical Brief
+## Part-3: Technical Brief
 
 ### API Comparison
 
