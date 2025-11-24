@@ -494,6 +494,29 @@ class BeautifulSoup(Tag):
         self.markup = None
         self.builder.soup = None
 
+    def __iter__(self):
+        """Method 1: Iterate over root and all children of this `Tag` in a
+        breadth-first sequence.
+        Manual traversal, duplicates existing traversal logic.
+        """
+        """
+        # Yield the root object itself first
+        yield self
+
+        # Use next_element to traverse the tree linearly
+        current_node = self.next_element
+        while current_node:
+            yield current_node
+            current_node = current_node.next_element
+        """
+
+        """Method 2: Iterate over all children of this `Tag` in a
+        breadth-first sequence.
+        Return self.descendants directly.
+        This overrides the default Tag behavior which only iterates over direct children.
+        """
+        return self.descendants
+
     def copy_self(self) -> "BeautifulSoup":
         """Create a new BeautifulSoup object with the same TreeBuilder,
         but not associated with any markup.
