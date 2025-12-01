@@ -33,6 +33,10 @@ class SoupReplacer:
             dummy = DummyTag(name)
             return self.name_xformer(dummy)
 
+        # Check if same tag name first, if so, just return directly
+        if self.og_tag == self.alt_tag:
+            return name
+
         if self.og_tag and name == self.og_tag:
             return self.alt_tag
 
