@@ -496,7 +496,7 @@ class BeautifulSoup(Tag):
 
     def __iter__(self):
         """Method 1: Iterate over root and all children of this `Tag` in a
-        breadth-first sequence.
+        depth-first sequence.
         Manual traversal, duplicates existing traversal logic.
         """
         """
@@ -511,7 +511,7 @@ class BeautifulSoup(Tag):
         """
 
         """Method 2: Iterate over all children of this `Tag` in a
-        breadth-first sequence.
+        depth-first sequence.
         Return self.descendants directly.
         This overrides the default Tag behavior which only iterates over direct children.
         """
